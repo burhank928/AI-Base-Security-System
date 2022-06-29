@@ -80,12 +80,14 @@ def run(
 ):
     custom.set_snapshot_Persons(user_id)
     source = str(source)
-    save_img = not nosave and not source.endswith('.txt')  # save inference images
+    # save_img = not nosave and not source.endswith('.txt')  # save inference images
     is_file = Path(source).suffix[1:] in (IMG_FORMATS + VID_FORMATS)
     is_url = source.lower().startswith(('rtsp://', 'rtmp://', 'http://', 'https://'))
     webcam = source.isnumeric() or source.endswith('.txt') or (is_url and not is_file)
     if is_url and is_file:
         source = check_file(source)  # download
+
+    save_img = False
 
     # Directories
     save_dir = increment_path(Path(project) / name, exist_ok=exist_ok)  # increment run
@@ -99,7 +101,7 @@ def run(
 
     # Dataloader
     if webcam:
-        view_img = check_imshow()
+        # view_img = check_imshow()
         cudnn.benchmark = True  # set True to speed up constant image size inference
         dataset = LoadStreams(source, img_size=imgsz, stride=stride, auto=pt)
         bs = len(dataset)  # batch_size
@@ -193,6 +195,7 @@ def run(
             # Stream results
             im0 = annotator.result()
             if view_img:
+                print(view_img)
                 cv2.imshow(str(p), im0)
                 cv2.waitKey(1)  # 1 millisecond
 

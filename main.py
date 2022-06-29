@@ -47,6 +47,7 @@ if __name__ == '__main__':
                 print("User Not Exist.")
     else:
         user_id = load_object("data.pickle")
+        print(user_id)
 
     face_recognition_thread = Thread(target=face_recognition_module, args=(user_id,))
     license_number_extraction_thread = Thread(target=license_number_extraction_module, args=(user_id,))
@@ -57,13 +58,14 @@ if __name__ == '__main__':
     voice_message_thread.start()
 
     print("wait for face_recognition_module join")
+    print("wait for license_number_extraction_module join")
+    print("wait for voice_message_module join")
+
     face_recognition_thread.join()
     print("face_recognition_module joined")
 
-    print("wait for license_number_extraction_module join")
     license_number_extraction_thread.join()
     print("license_number_extraction_module joined")
 
-    print("wait for voice_message_module join")
     voice_message_thread.start()
     print("voice_message_module joined")
