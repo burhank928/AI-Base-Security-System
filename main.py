@@ -4,7 +4,7 @@ from firebase_admin import auth
 
 from face_recognition_pkg.main import face_recognition_module
 from license_number_extraction_pkg.main import license_number_extraction_module
-from solenoid_lock_pkg.main import solenoid_lock_module
+# from solenoid_lock_pkg.main import solenoid_lock_module
 from voice_message_pkg.main import voice_message_module
 from threading import Thread
 
@@ -52,25 +52,25 @@ if __name__ == '__main__':
 
     face_recognition_thread = Thread(target=face_recognition_module, args=(user_id,))
     license_number_extraction_thread = Thread(target=license_number_extraction_module, args=(user_id,))
-    solenoid_lock_thread = Thread(target=solenoid_lock_module, args=(user_id,))
+    # solenoid_lock_thread = Thread(target=solenoid_lock_module, args=(user_id,))
     voice_message_thread = Thread(target=voice_message_module, args=(user_id,))
 
     face_recognition_thread.start()
     license_number_extraction_thread.start()
-    solenoid_lock_thread.start()
+    # solenoid_lock_thread.start()
     voice_message_thread.start()
 
     print("wait for face_recognition_module join")
     print("wait for license_number_extraction_module join")
-    print("wait for solenoid_lock_module join")
+    # print("wait for solenoid_lock_module join")
     print("wait for voice_message_module join")
 
     face_recognition_thread.join()
     license_number_extraction_thread.join()
-    solenoid_lock_thread.join()
+    # solenoid_lock_thread.join()
     voice_message_thread.start()
 
     print("face_recognition_module joined")
     print("license_number_extraction_module joined")
-    print("solenoid_lock_module joined")
+    # print("solenoid_lock_module joined")
     print("voice_message_module joined")
