@@ -88,7 +88,8 @@ def start_recognition(id):
     global user_id
 
     user_id = id
-    camera = cv.VideoCapture('rtsp://192.168.10.29/live/ch00_1')
+    camera_ip = 'rtsp://192.168.10.29/live/ch00_1'
+    camera = cv.VideoCapture(camera_ip)
     doc_ref = db.collection(user_id).document('data').collection('Encodings')
     doc_watch = doc_ref.on_snapshot(on_snapshot)
 

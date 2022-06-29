@@ -4,7 +4,7 @@ from firebase_admin import auth
 
 from face_recognition_pkg.main import face_recognition_module
 from license_number_extraction_pkg.main import license_number_extraction_module
-# from voice_message_pkg.main import voice_message_module
+from voice_message_pkg.main import voice_message_module
 from threading import Thread
 
 
@@ -50,11 +50,11 @@ if __name__ == '__main__':
 
     face_recognition_thread = Thread(target=face_recognition_module, args=(user_id,))
     license_number_extraction_thread = Thread(target=license_number_extraction_module, args=(user_id,))
-    # voice_message_thread = Thread(target=voice_message_module, args=(user_id,))
+    voice_message_thread = Thread(target=voice_message_module, args=(user_id,))
 
     face_recognition_thread.start()
     license_number_extraction_thread.start()
-    # voice_message_thread.start()
+    voice_message_thread.start()
 
     print("wait for face_recognition_module join")
     face_recognition_thread.join()
@@ -64,6 +64,6 @@ if __name__ == '__main__':
     license_number_extraction_thread.join()
     print("license_number_extraction_module joined")
 
-    # print("wait for voice_message_module join")
-    # voice_message_thread.start()
-    # print("voice_message_module joined")
+    print("wait for voice_message_module join")
+    voice_message_thread.start()
+    print("voice_message_module joined")
