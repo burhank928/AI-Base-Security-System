@@ -48,7 +48,17 @@ def voice_message_module(uid):
     doc_ref = db.collection(user_id).document('data').collection('Voice_note')
     doc_watch = doc_ref.on_snapshot(on_snapshot)
 
-
+    #start
+def bthread():
+    bthread = Thread(target=voice_message_module, args=(user_id,))
+    print('bthread_voice_message_module.start()')
+    
+    
+    bthread.start()
+    bthread.join()
+    print('bthread_voice_message_module.join()')
+    
+    #end
 # if __name__ == '__main__':
 #     uid = 'Jl2eZMHRHJQtSKYLBfxJv5Ynrt93'
 #     voice_message_module(uid)
